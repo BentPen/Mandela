@@ -1,13 +1,12 @@
-
 use bevy::color::palettes::css::BLACK;
+use bevy::color::palettes::css::BLUE;
+use bevy::color::palettes::css::RED;
 use bevy::color::palettes::css::WHITE;
 use bevy::color::palettes::css::YELLOW;
 use bevy::prelude::*;
-use bevy::color::palettes::css::BLUE;
-use bevy::color::palettes::css::RED;
 
-use crate::player::Player;
 use crate::lights::LightSource;
+use crate::player::Player;
 
 /// How quickly should the camera snap to the desired location.
 const CAMERA_DECAY_RATE: f32 = 2.;
@@ -32,7 +31,7 @@ pub fn setup_main_tile(
                 ColorStop::auto(BLUE.with_alpha(0.1)),
             ])
             .into(),
-            Gradient::Radial(RadialGradient{
+            Gradient::Radial(RadialGradient {
                 position: UiPosition::new(Vec2::ZERO, Val::Percent(-20.), Val::Percent(30.)),
                 stops: vec![
                     ColorStop::auto(BLACK.with_alpha(0.1)),
@@ -40,14 +39,13 @@ pub fn setup_main_tile(
                     ColorStop::auto(BLACK.with_alpha(0.1)),
                 ],
                 ..Default::default()
-            })
-            // (vec![
-            //     // ColorStop::auto(RED),
-            //     ColorStop::auto(RED.with_alpha(0.1)),
-            //     ColorStop::auto(BLUE.with_alpha(0.1)),
-            // ])
-            // .into(),
-        ])
+            }), // (vec![
+                //     // ColorStop::auto(RED),
+                //     ColorStop::auto(RED.with_alpha(0.1)),
+                //     ColorStop::auto(BLUE.with_alpha(0.1)),
+                // ])
+                // .into(),
+        ]),
     ));
     commands.spawn((
         Mesh2d(meshes.add(Rectangle::new(1000., 200.))),

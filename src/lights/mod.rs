@@ -1,4 +1,3 @@
-
 // pub mod flicker;
 
 use bevy::prelude::*;
@@ -7,7 +6,7 @@ use bevy::render::view::screenshot::save_to_disk;
 use crate::player::Player;
 
 /// Constant offset of light relative to camera
-const LIGHT_OFFSET: (f32,f32) = (-250.0, 250.0);
+const LIGHT_OFFSET: (f32, f32) = (-250.0, 250.0);
 
 // #[derive(Resource)]
 // pub struct LightQualities {
@@ -38,7 +37,7 @@ pub fn update_main_light(
     time: Res<Time>,
 ) {
     let Vec3 { x, y, .. } = camera.translation;
-    let direction = Vec3::new(x+LIGHT_OFFSET.0, y+LIGHT_OFFSET.1, camera.translation.z);
+    let direction = Vec3::new(x + LIGHT_OFFSET.0, y + LIGHT_OFFSET.1, camera.translation.z);
     light
         .translation
         .smooth_nudge(&direction, 50., time.delta_secs());

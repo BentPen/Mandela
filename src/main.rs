@@ -2,14 +2,14 @@ use bevy::asset::AssetMetaCheck;
 use bevy::post_process::bloom::Bloom;
 use bevy::prelude::*;
 
-mod control;
-mod player;
 mod camera;
+mod control;
 mod lights;
+mod player;
 
-use player::PlayerPlugin;
 use camera::*;
 use lights::*;
+use player::PlayerPlugin;
 
 fn setup_camera(mut commands: Commands) {
     // commands.spawn(Camera2d);
@@ -17,17 +17,18 @@ fn setup_camera(mut commands: Commands) {
 }
 
 fn main() {
-	App::new()
-        .add_plugins(
-            DefaultPlugins.set(AssetPlugin {
+    App::new()
+        .add_plugins(DefaultPlugins.set(AssetPlugin {
             meta_check: AssetMetaCheck::Never,
             file_path: "src/assets".into(),
             ..default()
         }))
-        .insert_resource(ClearColor(Color::BLACK))  // We have updated the bg color to white
-        .add_systems(Startup, (setup_main_tile, setup_main_light, setup_camera).chain())
+        .insert_resource(ClearColor(Color::BLACK)) // We have updated the bg color to white
+        .add_systems(
+            Startup,
+            (setup_main_tile, setup_main_light, setup_camera).chain(),
+        )
         .add_systems(Update, (update_camera, update_main_light).chain())
         .add_plugins(PlayerPlugin)
         .run();
 }
-

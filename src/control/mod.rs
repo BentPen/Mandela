@@ -1,8 +1,6 @@
-
 use bevy::prelude::*;
 
 pub fn get_input_direction(input: Res<ButtonInput<KeyCode>>) -> Vec2 {
-
     let mut direction = Vec2::ZERO;
     if input.pressed(KeyCode::ArrowLeft) || input.pressed(KeyCode::KeyA) {
         direction.x -= 1.0;

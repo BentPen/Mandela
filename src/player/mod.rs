@@ -1,6 +1,5 @@
-
-use bevy::prelude::*;
 use crate::control::get_input_direction;
+use bevy::prelude::*;
 
 const TILE_SIZE: u32 = 64; // 64x64 tiles
 const MAX_FRAMES: usize = 9; // 9 columns per walking row
@@ -16,7 +15,7 @@ pub struct PlayerPlugin;
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, spawn_player)
-        .add_systems(Update, (move_player, animate_player));
+            .add_systems(Update, (move_player, animate_player));
     }
 }
 
@@ -55,7 +54,6 @@ impl Plugin for PlayerPlugin {
 //     ));
 // }
 
-
 fn move_player(
     input: Res<ButtonInput<KeyCode>>,
     time: Res<Time>,
@@ -75,9 +73,17 @@ fn move_player(
 
         // Update facing based on dominant direction
         if direction.x.abs() > direction.y.abs() {
-            anim.facing = if direction.x > 0.0 { Facing::Right } else { Facing::Left };
+            anim.facing = if direction.x > 0.0 {
+                Facing::Right
+            } else {
+                Facing::Left
+            };
         } else {
-            anim.facing = if direction.y > 0.0 { Facing::Up } else { Facing::Down };
+            anim.facing = if direction.y > 0.0 {
+                Facing::Up
+            } else {
+                Facing::Down
+            };
         }
     } else {
         anim.moving = false;
@@ -168,7 +174,6 @@ fn animate_player(
     //         timer.reset();
     //     }
     // }
-
 }
 
 /// Row index, not overall index
@@ -178,7 +183,7 @@ fn row_start_index(mode: AnimMode, facing: Facing) -> usize {
 
 /// Overall index
 fn atlas_index_for(mode: AnimMode, facing: Facing, frame_in_row: usize) -> usize {
-    MAX_FRAMES*row_start_index(mode, facing) + frame_in_row.min(block_width(mode) - 1)
+    MAX_FRAMES * row_start_index(mode, facing) + frame_in_row.min(block_width(mode) - 1)
 }
 
 /// Row offset for mode (e.g., 0, 4, 8, ...)
@@ -190,7 +195,7 @@ fn block_offset(mode: AnimMode) -> usize {
         AnimMode::Thrusting => 3,
         AnimMode::Walking => 4,
     };
-    4*num_blocks
+    4 * num_blocks
 }
 
 /// Only for knowing how many frames before wrapping (as after the width the PNG is blank)
@@ -243,11 +248,16 @@ fn spawn_player(
         ),
         Transform::from_translation(Vec3::ZERO),
         Player,
-        AnimationState { mode, facing, moving: false, was_moving: false, tick: 0 },
+        AnimationState {
+            mode,
+            facing,
+            moving: false,
+            was_moving: false,
+            tick: 0,
+        },
         AnimationTimer(Timer::from_seconds(ANIM_DT, TimerMode::Repeating)),
     ));
 }
-
 
 #[derive(Component, Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Facing {
@@ -263,7 +273,7 @@ pub enum AnimMode {
     Jumping,
     Running,
     Thrusting,
-    Walking
+    Walking,
 }
 
 #[derive(Component, Deref, DerefMut)]
@@ -275,5 +285,5 @@ struct AnimationState {
     facing: Facing,
     moving: bool,
     was_moving: bool,
-    tick: u8
+    tick: u8,
 }
