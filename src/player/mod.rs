@@ -147,13 +147,19 @@ fn animate_player(
     } else {
         if anim.tick > 800 {
             match anim.mode {
-                AnimMode::Thrusting => {anim.mode = AnimMode::Jumping;}
+                AnimMode::Thrusting => {
+                    anim.mode = AnimMode::Jumping;
+                }
                 _ => {}
             }
         } else if anim.tick > 500 {
             match anim.mode {
-                AnimMode::Idle => {anim.mode = AnimMode::Thrusting;}
-                AnimMode::Walking => {anim.mode = AnimMode::Running;}
+                AnimMode::Idle => {
+                    anim.mode = AnimMode::Thrusting;
+                }
+                AnimMode::Walking => {
+                    anim.mode = AnimMode::Running;
+                }
                 _ => {}
             }
         }
