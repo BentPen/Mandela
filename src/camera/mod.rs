@@ -2,7 +2,7 @@ use bevy::color::palettes::css::BLACK;
 use bevy::color::palettes::css::BLUE;
 use bevy::color::palettes::css::RED;
 use bevy::color::palettes::css::WHITE;
-use bevy::color::palettes::css::YELLOW;
+// use bevy::color::palettes::css::YELLOW;
 use bevy::prelude::*;
 
 use crate::lights::LightSource;

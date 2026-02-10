@@ -3,7 +3,7 @@ use bevy::prelude::*;
 
 const TILE_SIZE: u32 = 64; // 64x64 tiles
 const MAX_FRAMES: usize = 9; // 9 columns per walking row
-const TICKS_PER_FRAME: u8 = 3;
+const TICKS_PER_FRAME: u16 = 3;
 const MOVE_SPEED: f32 = 140.0; // pixels per second
 const ANIM_DT: f32 = 0.1; // seconds per frame (~10 FPS)
 
@@ -124,16 +124,20 @@ fn animate_player(
         anim.mode = AnimMode::Idle;
     } else {
         anim.tick += 1;
-        if anim.tick < TICKS_PER_FRAME {
+        if anim.tick % TICKS_PER_FRAME > 0 {
             return;
         }
     }
-    anim.tick = 0;
+
+    if anim.tick > 10000 {
+        anim.tick = 0;
+    }
 
     // Update previous movement state
     anim.was_moving = anim.moving;
 
     if just_started || just_stopped {
+        anim.tick = 0;
         // On tap or movement start, immediately advance one frame for visible feedback
         let row_start = atlas_index_for(anim.mode, anim.facing, 0);
         let next_col = (current_col + 1) % block_width(anim.mode);
@@ -141,6 +145,18 @@ fn animate_player(
         // Restart the timer so the next advance uses a full interval
         timer.reset();
     } else {
+        if anim.tick > 800 {
+            match anim.mode {
+                AnimMode::Thrusting => {anim.mode = AnimMode::Jumping;}
+                _ => {}
+            }
+        } else if anim.tick > 500 {
+            match anim.mode {
+                AnimMode::Idle => {anim.mode = AnimMode::Thrusting;}
+                AnimMode::Walking => {anim.mode = AnimMode::Running;}
+                _ => {}
+            }
+        }
         // Continuous movement: advance based on timer cadence
         timer.tick(time.delta());
         if timer.just_finished() {
@@ -285,5 +301,5 @@ struct AnimationState {
     facing: Facing,
     moving: bool,
     was_moving: bool,
-    tick: u8,
+    tick: u16,
 }

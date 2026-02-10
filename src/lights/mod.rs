@@ -1,7 +1,7 @@
 // pub mod flicker;
 
 use bevy::prelude::*;
-use bevy::render::view::screenshot::save_to_disk;
+// use bevy::render::view::screenshot::save_to_disk;
 
 use crate::player::Player;
 
