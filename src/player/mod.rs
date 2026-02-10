@@ -145,13 +145,8 @@ fn animate_player(
         // Restart the timer so the next advance uses a full interval
         timer.reset();
     } else {
-        if anim.tick > 800 {
-            match anim.mode {
-                AnimMode::Thrusting => {
-                    anim.mode = AnimMode::Jumping;
-                }
-                _ => {}
-            }
+        if anim.tick > 800 && anim.mode == AnimMode::Thrusting {
+            anim.mode = AnimMode::Jumping;
         } else if anim.tick > 500 {
             match anim.mode {
                 AnimMode::Idle => {
