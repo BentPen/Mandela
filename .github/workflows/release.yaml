@@ -51,39 +51,39 @@ concurrency:
 # Configure the release workflow by editing the following values.
 env:
   # The base filename of the binary produced by `cargo build`.
-  cargo_build_binary_name: test_bevy
+  cargo_build_binary_name: Mandela
 
   # The path to the assets directory.
   assets_path: assets
 
   # The itch.io project to deploy to in the format `user-name/project-name`.
   # There will be no deployment to itch.io if this is commented out.
-  itch_page: BentPen/test_project
+  itch_page: BentPen/Mandela
 
   # The ID of the app produced by this workflow.
   # Applies to macOS releases.
   # Must contain only A-Z, a-z, 0-9, hyphen, and period: <https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier>.
-  app_id: bent-pen.test-bevy
+  app_id: bent-pen.mandela
 
   # The base filename of the binary in the package produced by this workflow.
   # Applies to Windows, macOS, and Linux releases.
   # Defaults to `cargo_build_binary_name` if commented out.
-  #app_binary_name: test_bevy
+  #app_binary_name: Mandela
 
   # The name of the `.zip` or `.dmg` file produced by this workflow.
   # Defaults to `app_binary_name` if commented out.
-  #app_package_name: test-bevy
+  #app_package_name: Mandela
 
   # The display name of the app produced by this workflow.
   # Applies to macOS releases.
   # Defaults to `app_package_name` if commented out.
-  #app_display_name: Test Bevy
+  #app_display_name: Mandela
 
   # The short display name of the app produced by this workflow.
   # Applies to macOS releases.
   # Must be 15 or fewer characters: <https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundlename>.
   # Defaults to `app_display_name` if commented out.
-  #app_short_name: Test Bevy
+  #app_short_name: Mandela
 
   # Before enabling LFS, please take a look at GitHub's documentation for costs and quota limits:
   # <https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-storage-and-bandwidth-usage>
